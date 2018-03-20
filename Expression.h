@@ -7,6 +7,8 @@
 
 #include <iostream>
 
+#define DEBUG false
+
 class Expression {
 private:
     Expression *left = nullptr;
@@ -16,13 +18,17 @@ private:
     std::string operateurs_binaires = ">&|";
     std::string operateurs_unaires  = "-#%";
 
-    bool is_unaire(char op);
-    bool is_binaire(char op);
+    bool is_unaire(char op)const;
+    bool is_binaire(char op)const;
 
 public:
     explicit Expression(std::string postfixe);
 
     virtual ~Expression();
+
+    bool operator==(const Expression &rhs) const;
+
+    bool operator!=(const Expression &rhs) const;
 
 };
 
