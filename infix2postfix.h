@@ -1,0 +1,18 @@
+//
+// Created by louis on 18/03/18.
+//
+
+#ifndef MODALE_INFIX2POSTFIX_H
+#define MODALE_INFIX2POSTFIX_H
+
+#define F_SIZEMAX 51
+
+typedef struct pile_symboles {
+    unsigned int top;
+    char symboles[F_SIZEMAX];
+} PILE_SYMBOLES;
+
+unsigned int Lire(char *formule);
+PILE_SYMBOLES *Infix2Postfix(unsigned int taille_infixe, const char *f_infixe);
+
+#endif //MODALE_INFIX2POSTFIX_H
