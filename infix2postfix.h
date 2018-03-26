@@ -15,4 +15,7 @@ typedef struct pile_symboles {
 unsigned int Lire(char *formule);
 PILE_SYMBOLES *Infix2Postfix(unsigned int taille_infixe, const char *f_infixe);
 
+bool is_unaire(char op);
+bool is_binaire(char op);
+
 #endif //MODALE_INFIX2POSTFIX_H

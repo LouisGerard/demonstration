@@ -7,7 +7,7 @@
 
 #include <iostream>
 
-#define DEBUG false
+#define DEBUG true
 
 class Expression {
 private:

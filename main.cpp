@@ -3,8 +3,10 @@
 
 #include "infix2postfix.h"
 #include "Expression.h"
+#include "Monde.h"
+#include "Regle.h"
 
-#define TEST false
+#define TEST true
 
 using namespace std;
 
@@ -27,16 +29,14 @@ int main() {
         cout << postfixe << endl;
         Expression expression(postfixe);
     } else {
-        Expression e1("c-b>a>-");
-        Expression e2("c-b>a>-");
-        assert(e1 == e2);
+        string exp = "ab>-";
+        Regle r1(">-");
+        assert(r1.is_appliquable(exp));
+        Regle r2("&-");
+        assert(!r2.is_appliquable(exp));
 
-        Expression e3("c-b>a>");
-        assert(e1 != e3);
-
-        Expression e4("d-b>a>-");
-        assert(e1 == e4);
-        cout << "All tests passed !" << endl;
+        pair<Arbre*, Arbre*> aze = r1(exp);
+        cout << "Toutes les epreuves passees" << endl;
     }
 
     return 0;

@@ -13,7 +13,9 @@ Expression::Expression(std::string postfixe) {
 
     if (is_binaire(operateur)) {
         unsigned long i = postfixe.size()-1;
-        while (i >= 0 && is_binaire(postfixe[i])) {}
+        while (i >= 0 && is_binaire(postfixe[i])) {
+            --i;
+        }
 
         if (DEBUG)
             std::cout << "cut ! " << i << std::endl;

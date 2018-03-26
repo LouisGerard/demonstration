@@ -7,4 +7,4 @@ add_executable(modale main.cpp
         infix2postfix.cpp infix2postfix.h
         Expression.cpp Expression.h
         Arbre.cpp Arbre.h
-        Regle.cpp Regle.h)
+        Regle.cpp Regle.h Monde.cpp Monde.h)
