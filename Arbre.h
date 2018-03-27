@@ -10,17 +10,34 @@
 #include <utility>
 #include "Monde.h"
 
+class Regle;
+
 class Arbre {
 private:
+    unsigned long expression_courante = 0;
     Arbre *gauche = nullptr;
     Arbre *droite = nullptr;
     std::vector<Monde*> mondes;
-    std::string expression;
+    std::vector<std::string> expressions;
+    std::vector<Regle*> regles;
 
 public:
     explicit Arbre(std::string expression);
 
-    const std::string &getExpression() const;
+
+    void setGauche(Arbre *gauche);
+    void setDroite(Arbre *droite);
+    void setRegles(std::vector<Regle*> regles);
+
+    Arbre *getGauche() const;
+    Arbre *getDroite() const;
+
+    void diviserExpression(std::string gauche, std::string droite);
+    void remplacerExpression(std::string nouvelle);
+    void expressionSuivante();
+    void run();
+
+    virtual ~Arbre();
 };
 
 

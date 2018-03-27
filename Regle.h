@@ -12,11 +12,11 @@
 class Regle {
 private:
     std::string operateurs;
-    void (*function) (Arbre*, std::string, std::string);
+    fonction f;
 public:
-    Regle(const std::string &operateurs, void (*function)(Arbre *, std::string, std::string));
+    Regle(const std::string &operateurs, fonction f);
 
-    void Regle::operator()(Arbre *arbre);
+    void operator()(Arbre *arbre, std::string expression);
     bool is_appliquable(const std::string &expression);
 };
 

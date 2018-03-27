@@ -4,12 +4,11 @@
 
 #include "Regle.h"
 
-Regle::Regle(const std::string &operateurs, void (*function)(Arbre *, std::string, std::string)) :
+Regle::Regle(const std::string &operateurs, fonction f) :
         operateurs(operateurs),
-        function(function) {}
+        f(f) {}
 
-void Regle::operator()(Arbre *arbre) {
-    std::string expression = arbre->getExpression();
+void Regle::operator()(Arbre *arbre, std::string expression) {
     std::string sub = expression.substr(0, expression.size()-operateurs.size());
 
     std::string gauche, droite;
@@ -20,7 +19,7 @@ void Regle::operator()(Arbre *arbre) {
 
     droite = sub.substr(0, i);
     gauche = sub.substr(i);
-    function(new Arbre(expression), gauche, droite);
+    f(arbre, gauche, droite);
 }
 
 bool Regle::is_appliquable(const std::string &expression) {

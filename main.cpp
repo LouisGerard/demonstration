@@ -2,9 +2,9 @@
 #include <cassert>
 
 #include "infix2postfix.h"
-#include "Expression.h"
 #include "Monde.h"
 #include "Regle.h"
+#include "k.h"
 
 #define TEST true
 
@@ -27,15 +27,26 @@ int main() {
         }
         postfixe += '-'; // preuve par l'absurde
         cout << postfixe << endl;
-        Expression expression(postfixe);
-    } else {
-        string exp = "ab>-";
-        Regle r1(">-");
-        assert(r1.is_appliquable(exp));
-        Regle r2("&-");
-        assert(!r2.is_appliquable(exp));
 
-        pair<Arbre*, Arbre*> aze = r1(exp);
+    } else {
+        /*string exp1 = "ab>-";
+        Regle r1(">-", &ou);
+        assert(r1.is_appliquable(exp1));
+        Regle r2("&-", &ou);
+        assert(!r2.is_appliquable(exp1));
+
+        Arbre *a = new Arbre("ab|");
+        Regle ou_r ("|", &ou);
+        assert(ou_r.is_appliquable(a->getExpression()));
+        ou_r(a);
+        assert(a->getGauche() != nullptr);
+        assert(a->getGauche()->getExpression() == "b");
+        assert(a->getDroite() != nullptr);
+        assert(a->getDroite()->getExpression() == "a");
+        free(a);*/
+        Arbre a("ab|");
+        a.setRegles(k());
+        a.run();
         cout << "Toutes les epreuves passees" << endl;
     }
 

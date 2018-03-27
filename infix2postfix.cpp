@@ -19,8 +19,6 @@
 // entree par l'utilisateur (par exemple sous la forme a & (-[]b => <>c).
 // -----------------------------------------------------------------------------
 
-#include <cstdio>
-#include <string>
 #include "infix2postfix.h"
 
 // -----------------------------------------------------------------------------
@@ -88,7 +86,7 @@ int IsProposition(char c) {
     return ((c >= 'a') && (c <= 'z'));
 }
 
-PILE_SYMBOLES *Infix2Postfix(unsigned int taille_infixe, char *f_infixe) {
+PILE_SYMBOLES *Infix2Postfix(unsigned int taille_infixe, const char *f_infixe) {
     // Transforme la formule infixe en expression postfixe, terminee par '\n'
     // La formule infixe initiale est lue de droite à gauche afin de preserver
     // l'associativité à gauche implicitement associée à l'absence de parentheses
