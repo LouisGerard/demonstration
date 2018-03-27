@@ -2,19 +2,20 @@
 // Created by louis on 26/03/18.
 //
 
+#include <cstring>
+#include <utility>
 #include "k.h"
 
 void ou(Arbre *arbre, std::string gauche, std::string droite) {
-    arbre->setGauche(new Arbre(gauche));
-    arbre->setDroite(new Arbre(droite));
+    arbre->diviserArbre(gauche, droite);
 }
 
 void et(Arbre *arbre, std::string gauche, std::string droite) {
-    arbre->diviserExpression(gauche, droite);
+    arbre->diviserExpression(std::move(gauche), std::move(droite));
 }
 
 void double_non(Arbre *arbre, std::string gauche, std::string droite) {
-    arbre->remplacerExpression(gauche);
+    arbre->remplacerExpression(std::move(gauche));
 }
 
 std::vector<Regle*> k() {

@@ -23,3 +23,7 @@ bool Monde::is_necessaire(char p, bool val) {
             return false;
     return true;
 }
+
+void Monde::assigne(char p, bool val) {
+    assignations.insert({p, val});
+}

@@ -44,7 +44,7 @@ int main() {
         assert(a->getDroite() != nullptr);
         assert(a->getDroite()->getExpression() == "a");
         free(a);*/
-        Arbre a("ab|");
+        Arbre a("ab&c|");
         a.setRegles(k());
         a.run();
         cout << "Toutes les epreuves passees" << endl;

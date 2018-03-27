@@ -13,6 +13,7 @@ private:
     std::unordered_map<char, bool> assignations;
     std::vector<Monde*> liens;
 public:
+    void assigne(char p, bool val);
     bool is_assigne(char p, bool val);
     bool is_possible(char p, bool val);
     bool is_necessaire(char p, bool val);

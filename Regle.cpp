@@ -14,7 +14,7 @@ void Regle::operator()(Arbre *arbre, std::string expression) {
     std::string gauche, droite;
     unsigned long i = sub.size()-1;
     while (i >= 0 && is_binaire(sub[i])) {
-        --i;
+        i -= 2;
     }
 
     droite = sub.substr(0, i);

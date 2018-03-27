@@ -8,21 +8,22 @@
 #include <vector>
 #include <string>
 #include <utility>
+#include <stack>
 #include "Monde.h"
 
 class Regle;
 
 class Arbre {
 private:
-    unsigned long expression_courante = 0;
     Arbre *gauche = nullptr;
     Arbre *droite = nullptr;
-    std::vector<Monde*> mondes;
-    std::vector<std::string> expressions;
+    std::stack<Monde*> mondes;
+    std::stack<std::string> expressions;
     std::vector<Regle*> regles;
 
 public:
     explicit Arbre(std::string expression);
+    explicit Arbre(Arbre *other);
 
 
     void setGauche(Arbre *gauche);
@@ -32,10 +33,10 @@ public:
     Arbre *getGauche() const;
     Arbre *getDroite() const;
 
+    void diviserArbre(std::string gauche, std::string droite);
     void diviserExpression(std::string gauche, std::string droite);
     void remplacerExpression(std::string nouvelle);
-    void expressionSuivante();
-    void run();
+    bool run();
 
     virtual ~Arbre();
 };
