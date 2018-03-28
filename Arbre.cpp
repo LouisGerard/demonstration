@@ -8,7 +8,7 @@
 
 Arbre::Arbre(std::string expression) {
     expressions.push(expression);
-    mondes.push(new Monde());
+    monde = new Monde();
 }
 
 void Arbre::setGauche(Arbre *gauche) {
@@ -19,21 +19,10 @@ void Arbre::setDroite(Arbre *droite) {
     Arbre::droite = droite;
 }
 
-Arbre *Arbre::getGauche() const {
-    return gauche;
-}
-
-Arbre *Arbre::getDroite() const {
-    return droite;
-}
-
 Arbre::~Arbre() {
     free(gauche);
     free(droite);
-    while(!mondes.empty()) {
-        free(mondes.top());
-        mondes.pop();
-    }
+    free(monde);
     for (Regle *r : regles)
         free(r);
 }
@@ -50,9 +39,9 @@ bool Arbre::run() {
             premier_operateur = e[e.size() - 2];
         }
         if (isalpha(premier_operateur)) {
-            if (mondes.top()->is_assigne(premier_operateur, !val))
+            if (monde->is_assigne(premier_operateur, !val))
                 break;
-            mondes.top()->assigne(premier_operateur, val);
+            monde->assigne(premier_operateur, val);
             expressions.pop();
             continue;
         }
@@ -63,10 +52,16 @@ bool Arbre::run() {
                 (*r)(this, e);
                 break;
             }
+
+        // règle contradictoire
+        if (nope)
+            return false;
     }
     if (gauche != nullptr && gauche->run())
         return true;
-    return droite != nullptr && droite->run();
+    if (droite != nullptr && droite->run())
+        return true;
+    return expressions.empty();
 }
 
 void Arbre::setRegles(std::vector<Regle *> regles) {
@@ -87,7 +82,7 @@ void Arbre::diviserExpression(std::string gauche, std::string droite) {
 Arbre::Arbre(Arbre *other) {
     expressions = other->expressions;
     regles = other->regles;
-    mondes = other->mondes;
+    monde = new Monde(other->monde);
 }
 
 void Arbre::diviserArbre(std::string gauche, std::string droite) {
@@ -98,4 +93,48 @@ void Arbre::diviserArbre(std::string gauche, std::string droite) {
     auto ad = new Arbre(this);
     ad->remplacerExpression(std::move(droite));
     setDroite(ad);
+}
+
+void Arbre::contraindreMonde(std::string expression) {
+    unsigned profondeur = 1;
+    for (unsigned long i = expression.size()-1; i >= 0; --i)
+        if (expression[i] == '#')
+            ++profondeur;
+        else
+            break;
+    MondeContrainte *contrainte = new MondeContrainte(this,
+                                                      profondeur,
+                                                      expression.substr(0, expression.size()-profondeur+1));
+    monde->contraindre(contrainte);
+    /*for (Monde *l : monde->getLiens()) {
+        Arbre a(expression, l);
+        if (!a.run()) {
+            nope = true;
+            break;
+        }
+    }*/
+    expressions.pop();
+}
+
+Arbre::Arbre(std::string expression, Monde *monde) {
+    expressions.push(expression);
+    Arbre::monde = monde;
+}
+
+void Arbre::creerMonde(std::string expression) {
+    auto *nouveauMonde = new Monde();
+    monde->lier(nouveauMonde);
+
+    Arbre a(expression, nouveauMonde);
+    if (!a.run())
+        nope = true;
+    expressions.pop();
+}
+
+void Arbre::setNope(bool nope) {
+    Arbre::nope = nope;
+}
+
+Monde *Arbre::getMonde() const {
+    return monde;
 }

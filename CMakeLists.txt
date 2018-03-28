@@ -5,8 +5,7 @@ set(CMAKE_CXX_STANDARD 11)
 
 add_executable(modale main.cpp
         infix2postfix.cpp infix2postfix.h
-        Expression.cpp Expression.h
         Arbre.cpp Arbre.h
         Regle.cpp Regle.h
         Monde.cpp Monde.h
-        k.cpp k.h)
+        k.cpp k.h MondeContrainte.cpp MondeContrainte.h)

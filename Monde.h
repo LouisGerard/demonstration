@@ -7,16 +7,25 @@
 
 #include <vector>
 #include <unordered_map>
+#include "MondeContrainte.h"
 
 class Monde {
 private:
-    std::unordered_map<char, bool> assignations;
     std::vector<Monde*> liens;
+    std::vector<MondeContrainte*> contraintes;
+    std::unordered_map<char, bool> assignations;
+
 public:
+    void contraindre(MondeContrainte *contrainte);
+    Monde() = default;
+    explicit Monde(Monde *other);
     void assigne(char p, bool val);
     bool is_assigne(char p, bool val);
-    bool is_possible(char p, bool val);
-    bool is_necessaire(char p, bool val);
+
+    void lier(Monde *other);
+    const std::vector<Monde *> &getLiens() const;
+
+    const std::unordered_map<char, bool> &getAssignations() const;
 };
 
 

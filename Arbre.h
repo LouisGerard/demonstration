@@ -17,25 +17,30 @@ class Arbre {
 private:
     Arbre *gauche = nullptr;
     Arbre *droite = nullptr;
-    std::stack<Monde*> mondes;
     std::stack<std::string> expressions;
     std::vector<Regle*> regles;
+    bool nope = false;
+    Monde* monde;
 
 public:
     explicit Arbre(std::string expression);
+    explicit Arbre(std::string expression, Monde* monde);
     explicit Arbre(Arbre *other);
 
+    Monde *getMonde() const;
 
     void setGauche(Arbre *gauche);
     void setDroite(Arbre *droite);
     void setRegles(std::vector<Regle*> regles);
 
-    Arbre *getGauche() const;
-    Arbre *getDroite() const;
+    void setNope(bool nope);
 
     void diviserArbre(std::string gauche, std::string droite);
     void diviserExpression(std::string gauche, std::string droite);
     void remplacerExpression(std::string nouvelle);
+    void creerMonde(std::string expression);
+    void contraindreMonde(std::string expression);
+
     bool run();
 
     virtual ~Arbre();

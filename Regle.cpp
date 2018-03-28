@@ -13,12 +13,19 @@ void Regle::operator()(Arbre *arbre, std::string expression) {
 
     std::string gauche, droite;
     unsigned long i = sub.size()-1;
-    while (i >= 0 && is_binaire(sub[i])) {
-        i -= 2;
+    unsigned long split = sub.size()-1;
+    while (i >= 0) {
+        if (is_binaire(sub[i]))
+            split -= 2;
+        else if (is_unaire(sub[i]))
+            --split;
+        else
+            break;
+        --i;
     }
 
-    droite = sub.substr(0, i);
-    gauche = sub.substr(i);
+    droite = sub.substr(0, split);
+    gauche = sub.substr(split);
     f(arbre, gauche, droite);
 }
 
