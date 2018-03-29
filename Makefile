@@ -9,4 +9,4 @@ clean :
 	rm $(EXEC_NAME)
 
 $(EXEC_NAME) :
-	$(CC) -o $(EXEC_NAME) $(INCLUDES) -std=c++11
+	$(CC) -o $(EXEC_NAME) $(CFLAGS) $(INCLUDES) -std=c++11
