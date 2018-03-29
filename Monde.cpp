@@ -39,3 +39,25 @@ void Monde::contraindre(MondeContrainte *contrainte) {
     contraintes.push_back(contrainte);
     contrainte->check();
 }
+
+void Monde::print() {
+    print(0);
+}
+
+void Monde::print(unsigned profondeur) {
+    std::cout << indent(profondeur) << "MONDE" << std::endl;
+    for (auto it : assignations)
+        std::cout << indent(profondeur) << it.first << " : " << it.second << std::endl;
+    if (!liens.empty())
+        std::cout << "LIENS : " << std::endl;
+    for (Monde *l : liens)
+        l->print(profondeur+1);
+}
+
+std::string Monde::indent(unsigned profondeur) {
+    std::string result;
+    for (unsigned long i = 0; i < profondeur; ++i) {
+        result += "  ";
+    }
+    return result;
+}

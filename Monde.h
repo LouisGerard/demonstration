@@ -5,6 +5,7 @@
 #ifndef MODALE_MONDE_H
 #define MODALE_MONDE_H
 
+#include <iostream>
 #include <vector>
 #include <unordered_map>
 #include "MondeContrainte.h"
@@ -14,6 +15,8 @@ private:
     std::vector<Monde*> liens;
     std::vector<MondeContrainte*> contraintes;
     std::unordered_map<char, bool> assignations;
+    void print(unsigned profondeur);
+    std::string indent(unsigned profondeur);
 
 public:
     void contraindre(MondeContrainte *contrainte);
@@ -26,6 +29,8 @@ public:
     const std::vector<Monde *> &getLiens() const;
 
     const std::unordered_map<char, bool> &getAssignations() const;
+
+    void print();
 };
 
 

@@ -43,8 +43,13 @@ int main() {
         cout << "Forme négative postfixe : " << postfixe << endl;
         Arbre arbre(postfixe);
         arbre.setRegles(k());   // todo choix
-        if (arbre.run())
-            cout << "Il existe une assignation qui rend la formule fausse : " << endl;  //todo montrer contre exemple, dump monde
+        if (arbre.run()) {
+            cout << "Il existe une assignation qui rend la formule fausse : " << endl;
+            Arbre *bloquant = &arbre;
+            while (bloquant->getGauche() != nullptr)
+                bloquant = bloquant->getGauche();
+            bloquant->getMonde()->print();
+        }
         else
             cout << "La formule est toujours vraie." << endl;
 

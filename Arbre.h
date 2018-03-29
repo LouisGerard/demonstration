@@ -28,11 +28,13 @@ public:
     explicit Arbre(Arbre *other);
 
     Monde *getMonde() const;
+    Arbre *getGauche() const;
+    Arbre *getDroite() const;
+    bool isNope() const;
 
     void setGauche(Arbre *gauche);
     void setDroite(Arbre *droite);
     void setRegles(std::vector<Regle*> regles);
-
     void setNope(bool nope);
 
     void diviserArbre(std::string gauche, std::string droite);

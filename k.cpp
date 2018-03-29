@@ -54,4 +54,4 @@ std::vector<Regle*> k() {
     result.push_back(new Regle(">", &implique));
     result.push_back(new Regle("#", &boite));
     return result;
-}
+} // todo add systems
