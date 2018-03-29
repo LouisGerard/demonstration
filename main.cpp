@@ -6,12 +6,26 @@
 #include "Regle.h"
 #include "k.h"
 
-#define TEST true
+#define TEST false
 
 using namespace std;
 
 int main() {
     if (!TEST) {
+        cout << endl << "\033[1;31;40m"
+             << ",------.                                          ,--.                   ,--.                        " << endl
+             << "|  .-.  \\  ,---. ,--,--,--. ,---. ,--,--,  ,---.,-'  '-.,--.--. ,--,--.,-'  '-. ,---. ,--.,--.,--.--." << endl
+             << "|  |  \\  :| .-. :|        || .-. ||      \\(  .-''-.  .-'|  .--'' ,-.  |'-.  .-'| .-. :|  ||  ||  .--'" << endl
+             << "|  '--'  /\\   --.|  |  |  |' '-' '|  ||  |.-'  `) |  |  |  |   \\ '-'  |  |  |  \\   --.'  ''  '|  |" << endl
+             << "`-------'  `----'`--`--`--' `---' `--''--'`----'  `--'  `--'    `--`--'  `--'   `----' `----' `--'" << endl
+             << endl
+             << "                    ,--.        ,--." << endl
+             << ",--,--,--. ,---.  ,-|  | ,--,--.|  |" << endl
+             << "|        || .-. |' .-. |' ,-.  ||  | \033[4;32mpar Louis GERARD & Mehri GOLCHIN KHARAZI\033[1;31;24m" << endl
+             << "|  |  |  |' '-' '\\ `-' |\\ '-'  ||  |" << endl
+             << "`--`--`--' `---'  `---'  `--`--'`--'" << endl
+             << endl << "\033[0m"
+             << "Veuillez entrer une formule : ";
         string postfixe;
         char f_infixe[F_SIZEMAX];
         unsigned int taille_infixe;
@@ -26,7 +40,13 @@ int main() {
             postfixe += f_postfixe->symboles[i];
         }
         postfixe += '-'; // preuve par l'absurde
-        cout << postfixe << endl;
+        cout << "Forme négative postfixe : " << postfixe << endl;
+        Arbre arbre(postfixe);
+        arbre.setRegles(k());   // todo choix
+        if (arbre.run())
+            cout << "Il existe une assignation qui rend la formule fausse : " << endl;  //todo montrer contre exemple, dump monde
+        else
+            cout << "La formule est toujours vraie." << endl;
 
     } else {
         /*string exp1 = "ab>-";
@@ -44,7 +64,7 @@ int main() {
         assert(a->getDroite() != nullptr);
         assert(a->getDroite()->getExpression() == "a");
         free(a);*/
-        Arbre a("a#-a#&");
+        Arbre a("a-a|-");
         a.setRegles(k());
         cout << a.run() << endl;
         cout << "Toutes les epreuves passees" << endl;
