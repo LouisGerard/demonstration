@@ -21,7 +21,6 @@ private:
 public:
     void contraindre(MondeContrainte *contrainte);
     Monde() = default;
-//    explicit Monde(Monde *other);
     void assigne(char p, bool val);
     bool is_assigne(char p, bool val);
 

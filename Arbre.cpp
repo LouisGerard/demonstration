@@ -22,7 +22,7 @@ void Arbre::setDroite(Arbre *droite) {
 Arbre::~Arbre() {
     free(gauche);
     free(droite);
-    free(monde);
+//    free(monde);
 //    for (Regle *r : regles)
 //        free(r);
 }
@@ -81,10 +81,11 @@ void Arbre::diviserExpression(std::string gauche, std::string droite) {
 
 void Arbre::diviserArbre(std::string gauche, std::string droite) {
     auto ag = new Arbre(*this);
+    auto ad = new Arbre(*this);
+
     ag->remplacerExpression(std::move(gauche));
     setGauche(ag);
 
-    auto ad = new Arbre(*this);
     ad->remplacerExpression(std::move(droite));
     setDroite(ad);
 }

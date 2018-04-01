@@ -73,7 +73,6 @@ int main() {
         Monde *m = new Monde();
         m->assigne('a', true);
         Monde m2 = Monde(*m);
-        int aze = 0;
     }
 
     return 0;

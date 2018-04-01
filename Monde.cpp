@@ -15,12 +15,6 @@ void Monde::assigne(char p, bool val) {
     assignations.insert({p, val});
 }
 
-/*Monde::Monde(Monde *other) {
-    assignations = other->assignations;
-    for (Monde *l : other->liens)
-        liens.push_back(new Monde(l));
-}*/
-
 const std::vector<Monde *> &Monde::getLiens() const {
     return liens;
 }
