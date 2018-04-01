@@ -23,8 +23,8 @@ Arbre::~Arbre() {
     free(gauche);
     free(droite);
     free(monde);
-    for (Regle *r : regles)
-        free(r);
+//    for (Regle *r : regles)
+//        free(r);
 }
 
 bool Arbre::run() {
@@ -64,8 +64,8 @@ bool Arbre::run() {
     return expressions.empty();
 }
 
-void Arbre::setRegles(std::vector<Regle *> regles) {
-    Arbre::regles = std::move(regles);
+void Arbre::setRegles(std::vector<Regle *> &regles) {
+    Arbre::regles = regles;
 }
 
 void Arbre::remplacerExpression(std::string nouvelle) {
@@ -79,18 +79,12 @@ void Arbre::diviserExpression(std::string gauche, std::string droite) {
     expressions.push(droite);
 }
 
-Arbre::Arbre(Arbre *other) {
-    expressions = other->expressions;
-    regles = other->regles;
-    monde = new Monde(other->monde);
-}
-
 void Arbre::diviserArbre(std::string gauche, std::string droite) {
-    auto ag = new Arbre(this);
+    auto ag = new Arbre(*this);
     ag->remplacerExpression(std::move(gauche));
     setGauche(ag);
 
-    auto ad = new Arbre(this);
+    auto ad = new Arbre(*this);
     ad->remplacerExpression(std::move(droite));
     setDroite(ad);
 }
@@ -119,6 +113,7 @@ void Arbre::creerMonde(std::string expression) {
     monde->lier(nouveauMonde);
 
     Arbre a(expression, nouveauMonde);
+    a.setRegles(regles);
     if (!a.run())
         nope = true;
     expressions.pop();
@@ -142,4 +137,8 @@ Arbre *Arbre::getGauche() const {
 
 Arbre *Arbre::getDroite() const {
     return droite;
+}
+
+const std::vector<Regle *> &Arbre::getRegles() const {
+    return regles;
 }

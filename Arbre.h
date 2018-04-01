@@ -25,16 +25,18 @@ private:
 public:
     explicit Arbre(std::string expression);
     explicit Arbre(std::string expression, Monde* monde);
-    explicit Arbre(Arbre *other);
 
     Monde *getMonde() const;
     Arbre *getGauche() const;
     Arbre *getDroite() const;
+
+    const std::vector<Regle *> &getRegles() const;
+
     bool isNope() const;
 
     void setGauche(Arbre *gauche);
     void setDroite(Arbre *droite);
-    void setRegles(std::vector<Regle*> regles);
+    void setRegles(std::vector<Regle*> &regles);
     void setNope(bool nope);
 
     void diviserArbre(std::string gauche, std::string droite);

@@ -42,7 +42,8 @@ int main() {
         postfixe += '-'; // preuve par l'absurde
         cout << "Forme négative postfixe : " << postfixe << endl;
         Arbre arbre(postfixe);
-        arbre.setRegles(k());   // todo choix
+        auto regles = k();
+        arbre.setRegles(regles);   // todo choix
         if (arbre.run()) {
             cout << "Il existe une assignation qui rend la formule fausse : " << endl;
             Arbre *bloquant = &arbre;
@@ -69,10 +70,10 @@ int main() {
         assert(a->getDroite() != nullptr);
         assert(a->getDroite()->getExpression() == "a");
         free(a);*/
-        Arbre a("a-a|-");
-        a.setRegles(k());
-        cout << a.run() << endl;
-        cout << "Toutes les epreuves passees" << endl;
+        Monde *m = new Monde();
+        m->assigne('a', true);
+        Monde m2 = Monde(*m);
+        int aze = 0;
     }
 
     return 0;

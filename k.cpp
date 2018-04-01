@@ -27,7 +27,7 @@ void implique(Arbre *arbre, std::string gauche, std::string droite) {
 }
 
 void non_implique(Arbre *arbre, std::string gauche, std::string droite) {
-    ou(arbre, std::move(gauche), droite+'-');
+    et(arbre, std::move(gauche), droite+'-');
 }
 
 void boite(Arbre *arbre, std::string gauche, std::string droite) {

@@ -21,13 +21,12 @@ private:
 public:
     void contraindre(MondeContrainte *contrainte);
     Monde() = default;
-    explicit Monde(Monde *other);
+//    explicit Monde(Monde *other);
     void assigne(char p, bool val);
     bool is_assigne(char p, bool val);
 
     void lier(Monde *other);
     const std::vector<Monde *> &getLiens() const;
-
     const std::unordered_map<char, bool> &getAssignations() const;
 
     void print();

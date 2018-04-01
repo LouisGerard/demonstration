@@ -15,6 +15,8 @@ void MondeContrainte::check() {
 void MondeContrainte::check(Monde *m, unsigned profondeur) {
     if (profondeur == 0) {
         Arbre a(expression, m);
+        auto regles = arbre->getRegles();
+        a.setRegles(regles);
         if (!a.run()) {
             arbre->setNope(true);
         }
