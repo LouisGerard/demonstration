@@ -42,6 +42,19 @@ void double_non(Arbre *arbre, std::string gauche, std::string droite) {
     arbre->remplacerExpression(std::move(gauche));
 }
 
+void losange(Arbre *arbre, std::string gauche, std::string droite) {
+    arbre->remplacerExpression(gauche + "-#-");
+}
+
+void non_losange(Arbre *arbre, std::string gauche, std::string droite) {
+    arbre->remplacerExpression(gauche + "-#");
+}
+
+void boite_t(Arbre *arbre, std::string gauche, std::string droite) {
+    boite(arbre, gauche, droite);
+    arbre->ajouterExpression(std::move(gauche));
+}
+
 std::vector<Regle*> k() {
     std::vector<Regle*> result;
     result.push_back(new Regle("--", &double_non));
@@ -52,6 +65,24 @@ std::vector<Regle*> k() {
     result.push_back(new Regle("|", &ou));
     result.push_back(new Regle("&", &et));
     result.push_back(new Regle(">", &implique));
+    result.push_back(new Regle("%", &losange));
+    result.push_back(new Regle("%-", &non_losange));
     result.push_back(new Regle("#", &boite));
     return result;
-} // todo add systems
+}
+
+std::vector<Regle*> t() {
+    std::vector<Regle*> result;
+    result.push_back(new Regle("--", &double_non));
+    result.push_back(new Regle("&-", &non_et));
+    result.push_back(new Regle("|-", &non_ou));
+    result.push_back(new Regle(">-", &non_implique));
+    result.push_back(new Regle("#-", &non_boite));
+    result.push_back(new Regle("|", &ou));
+    result.push_back(new Regle("&", &et));
+    result.push_back(new Regle(">", &implique));
+    result.push_back(new Regle("%", &losange));
+    result.push_back(new Regle("%-", &non_losange));
+    result.push_back(new Regle("#", &boite_t));
+    return result;
+}

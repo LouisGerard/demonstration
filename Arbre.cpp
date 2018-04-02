@@ -109,7 +109,7 @@ Arbre::Arbre(std::string expression, Monde *monde) {
     Arbre::monde = monde;
 }
 
-void Arbre::creerMonde(std::string expression) {
+Monde *Arbre::creerMonde(std::string expression) {
     auto *nouveauMonde = new Monde();
     monde->lier(nouveauMonde);
 
@@ -118,6 +118,7 @@ void Arbre::creerMonde(std::string expression) {
     if (!a.run())
         nope = true;
     expressions.pop();
+    return nouveauMonde;
 }
 
 void Arbre::setNope(bool nope) {
@@ -142,4 +143,8 @@ Arbre *Arbre::getDroite() const {
 
 const std::vector<Regle *> &Arbre::getRegles() const {
     return regles;
+}
+
+void Arbre::ajouterExpression(std::string nouvelle) {
+    expressions.push(nouvelle);
 }

@@ -31,7 +31,9 @@ char NextChar(void) {
 
     char c;
 
-    while ((c = static_cast<char>(getchar())) == ' ') {}
+    do {
+        std::cin >> c;
+    } while (c == ' ');
     return c;
 }
 
@@ -139,7 +141,7 @@ unsigned int Lire(char *formule) {
 
     formule[F_SIZEMAX] = '\n';   // sentinelle
     formule[longueur] = '(';
-    while ((formule[++longueur] = NextChar()) != '\n') {}
+    while ((formule[++longueur] = NextChar()) != ';') {}
     formule[longueur] = ')';
     formule[++longueur] = '\n';
 

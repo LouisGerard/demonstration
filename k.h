@@ -9,5 +9,6 @@
 #include "Regle.h"
 
 std::vector<Regle*> k();
+std::vector<Regle*> t();
 
 #endif //MODALE_K_H

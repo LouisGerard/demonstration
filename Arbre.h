@@ -42,7 +42,8 @@ public:
     void diviserArbre(std::string gauche, std::string droite);
     void diviserExpression(std::string gauche, std::string droite);
     void remplacerExpression(std::string nouvelle);
-    void creerMonde(std::string expression);
+    void ajouterExpression(std::string nouvelle);
+    Monde *creerMonde(std::string expression);
     void contraindreMonde(std::string expression);
 
     bool run();

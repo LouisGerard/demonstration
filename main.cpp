@@ -25,7 +25,24 @@ int main() {
              << "|  |  |  |' '-' '\\ `-' |\\ '-'  ||  |" << endl
              << "`--`--`--' `---'  `---'  `--`--'`--'" << endl
              << endl << "\033[0m"
-             << "Veuillez entrer une formule : ";
+             << "Choisissez votre systeme : " << endl
+             << "1 pour K" << endl
+             << "2 pour T" << endl;
+        char sys_lu;
+        cin >> sys_lu;
+        vector<Regle*> sys;
+        switch (sys_lu) {
+            case '1':
+                sys = k();
+                break;
+            case '2':
+                sys = t();
+                break;
+            default:
+                cerr << "Mauvais système !" << endl;
+                return -1;
+        }
+        cout << "Veuillez entrer une formule : ";
         string postfixe;
         char f_infixe[F_SIZEMAX];
         unsigned int taille_infixe;
@@ -42,8 +59,7 @@ int main() {
         postfixe += '-'; // preuve par l'absurde
         cout << "Forme négative postfixe : " << postfixe << endl;
         Arbre arbre(postfixe);
-        auto regles = k();
-        arbre.setRegles(regles);   // todo choix
+        arbre.setRegles(sys);
         if (arbre.run()) {
             cout << "Il existe une assignation qui rend la formule fausse : " << endl;
             Arbre *bloquant = &arbre;
