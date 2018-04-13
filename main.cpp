@@ -63,8 +63,14 @@ int main() {
         if (arbre.run()) {
             cout << "Il existe une assignation qui rend la formule fausse : " << endl;
             Arbre *bloquant = &arbre;
-            while (bloquant->getGauche() != nullptr)
-                bloquant = bloquant->getGauche();
+            while (true) {
+                if (bloquant->getGauche() != nullptr && bloquant->getGauche()->isNope())
+                    bloquant = bloquant->getGauche();
+                else if (bloquant->getDroite() != nullptr && bloquant->getDroite()->isNope())
+                    bloquant = bloquant->getDroite();
+                else
+                    break;
+            }
             bloquant->getMonde()->print();
         }
         else

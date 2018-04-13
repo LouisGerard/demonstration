@@ -61,6 +61,7 @@ bool Arbre::run() {
         return true;
     if (droite != nullptr && droite->run())
         return true;
+    nope = !expressions.empty();
     return expressions.empty();
 }
 
